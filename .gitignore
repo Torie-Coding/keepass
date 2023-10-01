@@ -2,3 +2,4 @@ spielen.yml
 .git
 venv
 .nox
+changelogs/.plugin-cache.yaml

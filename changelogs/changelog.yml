@@ -1,0 +1,19 @@
+ancestor: null
+releases:
+  1.0.1:
+    changes:
+      minor_changes:
+      - entry.py - Added defaults and corrected Documentation
+      - group.py - Added defaults and corrected Documentation
+      - runtime.yml - Added requirert Ansible Version
+      release_summary: Added some Documentation for requirements and defaults
+    fragments:
+    - 1.0.1.yml
+    modules:
+    - description: Manage entries in a KeePass (kdbx) database.
+      name: entry
+      namespace: 'torie_coding'
+    - description: Manage groups in a KeePass (kdbx) database.
+      name: group
+      namespace: 'torie_coding'
+    release_date: '2023-10-01'

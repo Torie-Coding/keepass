@@ -55,7 +55,7 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
     password: mypassword
     url: https://example.com
     group_name: MyGroup
-    icon_id: 49
+    icon_id: 48
   register: entry
 
 - name: Create a new entry in KeePass with generated password
@@ -68,7 +68,7 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
     password_length: 16
     url: https://example.com
     group_name: MyGroup
-    icon_id: 49
+    icon_id: 48
   register: entry
 
 - name: Modify the URL of an entry in KeePass

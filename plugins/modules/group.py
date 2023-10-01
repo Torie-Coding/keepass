@@ -62,13 +62,15 @@ options:
         type: str
     icon_id:
         description:
-            - Icon ID to be associated with the group. Defaults to '48'.
+            - Icon ID to be associated with the group.
         required: false
         type: str
+        default: 48
     action:
         description:
             - The action to perform (create, modify, delete).
         required: true
+        choices: ['create', 'modify', 'delete']
         type: str
     notes:
         description:
@@ -91,7 +93,7 @@ EXAMPLES = '''
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
     name: MyNewGroup
-    icon_id: 49
+    icon_id: 48
     notes: This is a new group created by Ansible.
   register: group
 

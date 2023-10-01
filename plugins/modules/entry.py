@@ -67,8 +67,9 @@ options:
         type: str
     password_length:
         description:
-            - The length of the generated passwords. Defaults to 30 characters.
+            - The length of the generated passwords. Defaults to 20 characters.
         required: false
+        default: 20
         type: int
     url:
         description:
@@ -82,13 +83,15 @@ options:
         type: str
     icon_id:
         description:
-            - Icon ID to be associated with the KeePass Icon IDs.
+            - Icon ID to be associated with the entry.
         required: false
         type: str
+        default: 58
     action:
         description:
             - The action to perform (create, modify, delete).
         required: true
+        choices: ['create', 'modify', 'delete']
         type: str
 author:
     - Tobias Karger und Marie Berger

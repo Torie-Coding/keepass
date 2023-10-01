@@ -3,3 +3,6 @@ spielen.yml
 venv
 .nox
 changelogs/.plugin-cache.yaml
+*.tar.gz
+.vscode
+.vscode/settings.json

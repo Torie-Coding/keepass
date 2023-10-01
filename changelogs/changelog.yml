@@ -12,8 +12,16 @@ releases:
     modules:
     - description: Manage entries in a KeePass (kdbx) database.
       name: entry
-      namespace: 'torie_coding'
+      namespace: torie_coding
     - description: Manage groups in a KeePass (kdbx) database.
       name: group
-      namespace: 'torie_coding'
+      namespace: torie_coding
+    release_date: '2023-10-01'
+  1.0.2:
+    changes:
+      minor_changes:
+      - galaxy.yml - updated tags
+      release_summary: updated tags in galaxy.yml
+    fragments:
+    - 1.0.2.yml
     release_date: '2023-10-01'

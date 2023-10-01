@@ -25,3 +25,11 @@ releases:
     fragments:
     - 1.0.2.yml
     release_date: '2023-10-01'
+  1.0.3:
+    changes:
+      minor_changes:
+      - galaxy.yml - repo and hompage (iam sorry i really forgot everything)
+      release_summary: updated repo and hompage in galaxy.yml
+    fragments:
+    - 1.0.3.yml
+    release_date: '2023-10-01'

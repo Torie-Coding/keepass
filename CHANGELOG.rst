@@ -5,6 +5,19 @@ Torie_Coding.Keepass Release Notes
 .. contents:: Topics
 
 
+v1.0.3
+======
+
+Release Summary
+---------------
+
+updated repo and hompage in galaxy.yml
+
+Minor Changes
+-------------
+
+- galaxy.yml - repo and hompage (iam sorry i really forgot everything)
+
 v1.0.2
 ======
 

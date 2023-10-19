@@ -25,7 +25,7 @@ else:
     pykeepass_found = True
 
 ANSIBLE_METADATA = {
-    'metadata_version': '1.0',
+    'metadata_version': '1.1',
     'status': ['release'],
     'supported_by': 'community'
 }
@@ -82,12 +82,24 @@ options:
             - The new name for the group (only for modifications).
         required: false
         type: str
+    path:
+        description:
+            - The path of the Group. Without the Groupname.
+        required: false
+        default: "/"
+        type: str
+    create_path:
+        description:
+            - Indicator that specifiys wether the path should be created if it's dosen't exists.
+        required: false
+        choices: ['true', 'false']
+        type: boolean
 author:
     - Tobias Karger und Marie Berger
 '''
 
 EXAMPLES = '''
-- name: Create a new group in KeePass
+- name: Create a new group in KeePass under existing path
   keepass_group:
     action: create
     database: /path/to/keepass.kdbx
@@ -95,6 +107,23 @@ EXAMPLES = '''
     name: MyNewGroup
     icon_id: 48
     notes: This is a new group created by Ansible.
+    path: foo/bar
+    create_path: false
+  register: group
+
+- debug:
+    var: group
+
+- name: Create a new group in KeePass under none existing path
+  keepass_group:
+    action: create
+    database: /path/to/keepass.kdbx
+    database_password: "your_database_password"
+    name: MyNewGroup
+    icon_id: 48
+    notes: This is a new group created by Ansible.
+    path: foo/bar/group
+    create_path: true
   register: group
 
 - debug:
@@ -107,6 +136,8 @@ EXAMPLES = '''
     database_password: "your_database_password"
     name: MyNewGroup
     new_name: MyAwsomeNewGroup
+    icon_id: 50
+    path: foo/bar
   register: group
 
 - debug:
@@ -118,6 +149,7 @@ EXAMPLES = '''
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
     name: MyAwsomeNewGroup
+    path: foo/bar
   register: group
 
 - debug:
@@ -134,6 +166,9 @@ icon_id:
 notes:
     description: The notes associated with the group.
     type: str
+full_path:
+    description: The path of the Group including the groupname.
+    type: str
 changed:
     description: Indicates whether a change was made to the group.
     type: bool
@@ -149,7 +184,9 @@ def main():
         icon_id=dict(type='str', required=False),
         action=dict(type='str', required=True),
         notes=dict(type='str', required=False),
-        new_name=dict(type='str', required=False)
+        new_name=dict(type='str', required=False),
+        path=dict(type='str', required=False),
+        create_path=dict(type=bool, required=False)
     )
 
     # seed the result dict in the object
@@ -182,12 +219,21 @@ def main():
     action                  = module.params['action']
     notes                   = module.params['notes']
     new_name                = module.params['new_name']
+    path                    = module.params['path']
+    create_path             = module.params['create_path']
 
     if (action.lower() == "create" and new_name) or (action.lower() == "delete" and new_name) :
         module.fail_json(msg="Action 'Create' or 'Delete' do not take 'new_name'")
 
     if not database_password and not keyfile:
         module.fail_json(msg="Either 'database_password' or 'keyfile' (or both) are required.")
+    
+    if (action.lower() == "create" and create_path is None) :
+        module.fail_json(msg="If Action 'Create' is given you need to set 'create_path' to specifiy wether given path should be created if not already exists")
+
+    if (action.lower() == "modify" and create_path is not None) :
+        module.fail_json(msg="If Action 'Modify' is given you cannot set 'create_path'")
+
 
     try:
         kp = PyKeePass(database, password=database_password, keyfile=keyfile)
@@ -200,31 +246,54 @@ def main():
     except (pykeepass.exceptions.HeaderChecksumError, pykeepass.exceptions.PayloadChecksumError):
         KEEPASS_OPEN_ERR = traceback.format_exc()
         module.fail_json(msg='Could not open the database, as the checksum of the database is wrong. This could be caused by a corrupt database.')
+    if not path:
+        directory_list = []
+    else:
+    # remove slashes at the beginning, the end and dobble slashes, that will cause problems
+        directory_list = path.split("/")
+        for idx, dir in enumerate(directory_list):
+            if dir == "":
+                directory_list.pop(idx)
 
     if action.lower() == "create":
-        # try to get the entry from the database
-        group = kp.find_groups(name=name, first=True)
-        if group:
-            if group.name == name:
-                result['icon_id'] = group.icon
-                result['name']    = group.name
-                result['notes']   = group.notes
-                module.exit_json(**result)
 
+        # check if group already exists
+        group = kp.find_groups(path=directory_list + [name], first=True)
+        if group is not None:
+            result = set_result(group, False)
+            module.exit_json(**result)
+
+        # only execute if dryrun is inactive
         if not module.check_mode:
             try:
-                kp.add_group(kp.root_group, group_name=name, icon=icon_id or '48', notes=notes or 'Generated by ansible.')
+                # check if path already exists
+                group = kp.find_groups(path=directory_list,first=True)
+                if not group and create_path is True:
+                    for idx, temp_name in enumerate(directory_list):
+                        temp_path = directory_list[0 : idx + 1]
+
+                        under_group = kp.find_groups(path=temp_path)
+                        if not under_group:
+                            dest_group = kp.find_groups(path=temp_path[:-1]) if len(temp_path) > 1 else kp.root_group
+                            if not dest_group:
+                                raise Exception("No destination group found")
+
+                            group = kp.add_group(dest_group, group_name=temp_name)
+
+                    kp.save()
+                elif not group and create_path is False:
+                    module.fail_json(msg="Path does not exist. If Path should be created set 'create_path' to True", exception=traceback.format_exc())
+                else:
+                    pass
+                kp.add_group(kp.find_groups(path=directory_list,first=True), group_name=name, icon=icon_id or '48', notes=notes or 'Generated by ansible.')
                 kp.save()
             except:
                 KEEPASS_SAVE_ERR = traceback.format_exc()
                 module.fail_json(msg='Could not add the group or save the database.', exception=KEEPASS_SAVE_ERR)
 
-        group = kp.find_groups(name=name, first=True)
+        group = kp.find_groups(path=directory_list + [name],first=True)
 
-        result['name']     = group.name
-        result['icon_id']   = group.icon
-        result['notes']     = group.notes
-        result['changed']   = True
+        result = set_result(group, True)
 
         # in the event of a successful module execution, you will want to
         # simple AnsibleModule.exit_json(), passing the key/value results
@@ -232,13 +301,10 @@ def main():
 
     elif action.lower() == "modify":
         # try to get the entry from the database
-        group = kp.find_groups(name=name)
-        if len (group) > 1:
-            module.fail_json(msg='More then one group found in Database', exception=traceback.format_exc())
-        elif len (group) == 0:
+        group = kp.find_groups(path=directory_list + [name], first=True)
+        if group is None:
             module.fail_json(msg='No group found in Database', exception=traceback.format_exc())
         else:
-            group = group[0]
             if notes:
                 group.notes = notes
 
@@ -250,23 +316,15 @@ def main():
 
             kp.save()
 
-            result['name']      = group.name
-            result['icon_id']   = group.icon
-            result['notes']     = group.notes
-            result['changed']   = True
-
-        # in the event of a successful module execution, you will want to
-        # simple AnsibleModule.exit_json(), passing the key/value results
-        module.exit_json(**result)
+            result = set_result(group, True)
+            module.exit_json(**result)
 
     elif action.lower() == "delete":
-        group = kp.find_groups(name=name)
-        if len (group) > 1:
-            module.fail_json(msg='More then one entry found in Database', exception=traceback.format_exc())
-        elif len (group) == 0:
-            module.fail_json(msg='No entry found in Database', exception=traceback.format_exc())
+        group = kp.find_groups(path=directory_list + [name], first=True)
+        if group is None:
+            module.fail_json(msg='No group found in Database', exception=traceback.format_exc())
         else:
-            kp.delete_group(group=group[0])
+            kp.delete_group(group=group)
             kp.save()
             module.exit_json(changed=True)
 
@@ -283,6 +341,17 @@ def generate_password(length):
 
     gen_password = ''.join(random.choice(alphabet) for _ in range(length))
     return gen_password
+
+def set_result(group, changed):
+    result = {}
+    result['name']          = group.name
+    result['icon_id']       = group.icon
+    result['full_path']     = ""
+    for dir in group.path:
+        result['full_path'] += dir + "/"
+    result['notes']         = group.notes
+    result['changed']       = changed
+    return result
 
 if __name__ == '__main__':
     main()

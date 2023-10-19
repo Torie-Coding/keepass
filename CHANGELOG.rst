@@ -5,6 +5,35 @@ Torie_Coding.Keepass Release Notes
 .. contents:: Topics
 
 
+v1.1.0
+======
+
+Release Summary
+---------------
+
+| Release Date: 2023-10-19
+| Added Feature nested group creation, added some code optimizations
+
+Major Changes
+-------------
+
+- group - nested group creation is possible, if create_path was set to true
+
+Minor Changes
+-------------
+
+- entry - range for icon_id was specified
+- entry - updated documetation
+- group - updated documetation
+
+Breaking Changes / Porting Guide
+--------------------------------
+
+- entry - Changed some keys of the return object from the Ansible module. Please check README.md
+- entry - The module entry requires the parameter group_path if entry is not located under the root directory. That way the module can make sure which entry should be touched, even if duplicate entries in different directories exist
+- group - Changed some keys of the return object from the Ansible module. Please check README.md
+- group - The module group requires the parameter path if group is not located under the root directory. When creating a new group the parameter create_path must be set.
+
 v1.0.3
 ======
 

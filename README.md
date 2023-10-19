@@ -37,7 +37,7 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
 - `password_length`: The length of the password that should be generated (only needed if no password is provided). Default length for action 'create' is 20.
 - `password`: The password that will be set for the entry (if on action 'create' no password is given, a password will be generated with given 'password_length').
 - `url`: URL that will be set for the KeePass entry.
-- `group_name`: Group name in which the KeePass entry is placed.
+- `group_path`: Group path in which to place the KeePass entry. If no value is given it will be created under the root directory.
 - `icon_id`: Icon ID to be associated with the KeePass entry.
 
 
@@ -54,7 +54,7 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
     username: myusername
     password: mypassword
     url: https://example.com
-    group_name: MyGroup
+    group_path: foo/bar/MyGroup
     icon_id: 48
   register: entry
 
@@ -67,7 +67,7 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
     username: myusername
     password_length: 16
     url: https://example.com
-    group_name: MyGroup
+    group_path: foo/bar/MyGroup
     icon_id: 48
   register: entry
 
@@ -108,6 +108,9 @@ This Ansible module allows you to manage groups in a KeePass (kdbx) database.
 - `icon_id`: Icon ID to be associated with the group. Defaults to '48'.
 - `notes`: Notes for the group.
 - `new_name`: The new name for the group (only for modifications).
+- `path`: The path of the Group. Without the Groupname.
+- `create:path`: Indicator that specifiys wether the path should be created if it's dosen't exists.
+
 
 #### Example
 
@@ -120,6 +123,8 @@ This Ansible module allows you to manage groups in a KeePass (kdbx) database.
     name: MyNewGroup
     icon_id: 49
     notes: This is a new group created by Ansible.
+    path: foo/bar/group
+    create_path: true
   register: group
 
 - debug:
@@ -132,6 +137,7 @@ This Ansible module allows you to manage groups in a KeePass (kdbx) database.
     database_password: "your_database_password"
     name: MyNewGroup
     new_name: MyAwesomeNewGroup
+    group_path: foo/bar/MyGroup
   register: group
 
 - debug:
@@ -143,6 +149,7 @@ This Ansible module allows you to manage groups in a KeePass (kdbx) database.
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
     name: MyAwesomeNewGroup
+    group_path: foo/bar/MyGroup
   register: group
 
 - debug:

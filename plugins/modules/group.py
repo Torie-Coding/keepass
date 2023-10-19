@@ -25,7 +25,7 @@ else:
     pykeepass_found = True
 
 ANSIBLE_METADATA = {
-    'metadata_version': '1.0',
+    'metadata_version': '1.1',
     'status': ['release'],
     'supported_by': 'community'
 }
@@ -97,7 +97,7 @@ author:
 '''
 
 EXAMPLES = '''
-- name: Create a new group in KeePass
+- name: Create a new group in KeePass under existing path
   keepass_group:
     action: create
     database: /path/to/keepass.kdbx
@@ -105,6 +105,23 @@ EXAMPLES = '''
     name: MyNewGroup
     icon_id: 48
     notes: This is a new group created by Ansible.
+    path: foo/bar
+    create_path: false
+  register: group
+
+- debug:
+    var: group
+
+- name: Create a new group in KeePass under none existing path
+  keepass_group:
+    action: create
+    database: /path/to/keepass.kdbx
+    database_password: "your_database_password"
+    name: MyNewGroup
+    icon_id: 48
+    notes: This is a new group created by Ansible.
+    path: foo/bar/group
+    create_path: true
   register: group
 
 - debug:
@@ -117,6 +134,8 @@ EXAMPLES = '''
     database_password: "your_database_password"
     name: MyNewGroup
     new_name: MyAwsomeNewGroup
+    icon_id: 50
+    path: foo/bar
   register: group
 
 - debug:
@@ -128,6 +147,7 @@ EXAMPLES = '''
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
     name: MyAwsomeNewGroup
+    path: foo/bar
   register: group
 
 - debug:
@@ -145,7 +165,7 @@ notes:
     description: The notes associated with the group.
     type: str
 full_path:
-    description: The path of the Group
+    description: The path of the Group including the groupname.
     type: str
 changed:
     description: Indicates whether a change was made to the group.
@@ -195,7 +215,6 @@ def main():
     name                    = module.params['name']
     icon_id                 = module.params['icon_id']
     action                  = module.params['action']
-    # TODO action lookup
     notes                   = module.params['notes']
     new_name                = module.params['new_name']
     path                    = module.params['path']
@@ -296,10 +315,7 @@ def main():
             kp.save()
 
             result = set_result(group, True)
-
-        # in the event of a successful module execution, you will want to
-        # simple AnsibleModule.exit_json(), passing the key/value results
-        module.exit_json(**result)
+            module.exit_json(**result)
 
     elif action.lower() == "delete":
         group = kp.find_groups(path=directory_list + [name], first=True)

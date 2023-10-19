@@ -1,0 +1,17 @@
+breaking_changes:
+  - entry - Changed some keys of the return object from the Ansible module. Please check README.md
+  - group - Changed some keys of the return object from the Ansible module. Please check README.md
+  - entry - The module entry requires the parameter group_path if entry is not located under the root directory. That way the module can make sure which entry should be touched, even if duplicate entries in different directories exist
+  - group - The module group requires the parameter path if group is not located under the root directory. When creating a new group the parameter create_path must be set.
+
+major_changes:
+  - group - nested group creation is possible, if create_path was set to true
+
+minor_changes:
+  - entry - range for icon_id was specified
+  - entry - updated documetation
+  - group - updated documetation
+
+release_summary: |
+   | Release Date: 2023-10-19
+   | Added Feature nested group creation, added some code optimizations

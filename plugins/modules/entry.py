@@ -236,8 +236,9 @@ def main():
         KEEPASS_OPEN_ERR = traceback.format_exc()
         module.fail_json(msg='Could not open the database, as the checksum of the database is wrong. This could be caused by a corrupt database.')
 
-    if icon_id >68:
-        module.fail_json(msg='Icon_id out of range. Choose a value between 0 and 68', exception=traceback.format_exc())
+    if icon_id is not None:
+        if icon_id > 68:
+            module.fail_json(msg='Icon_id out of range. Choose a value between 0 and 68', exception=traceback.format_exc())
 
     if not group_path:
         directory_list = []

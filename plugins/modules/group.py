@@ -86,11 +86,13 @@ options:
         description:
             - The path of the Group. Without the Groupname.
         required: false
+        default: "/"
         type: str
     create_path:
         description:
             - Indicator that specifiys wether the path should be created if it's dosen't exists.
         required: false
+        choices: ['true', 'false']
         type: boolean
 author:
     - Tobias Karger und Marie Berger

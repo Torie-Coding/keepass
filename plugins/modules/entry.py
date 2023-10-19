@@ -174,7 +174,7 @@ def main():
         database_password=dict(type='str', required=False, default=None, no_log=True),
         password=dict(type='str', required=False, default=None, no_log=True),
         password_length=dict(type='int', required=False, no_log=False),
-        username=dict(type='str', required=True),
+        username=dict(type='str', required=False),
         url=dict(type='str', required=False),
         group_path=dict(type='str', required=False),
         icon_id=dict(type='str', required=False),
@@ -317,6 +317,12 @@ def main():
             kp.delete_entry(entry=entry)
             kp.save()
             module.exit_json(changed=True)
+
+    elif action.lower() == "view":
+        result = []
+        for entry in group.entries:
+            result.append(set_result(entry, False))
+        module.exit_json(results=result)
 
     else:
         module.fail_json(msg='No action matched', exception=traceback.format_exc())

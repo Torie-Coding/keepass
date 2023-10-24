@@ -32,7 +32,7 @@ ANSIBLE_METADATA = {
 
 DOCUMENTATION = '''
 ---
-module: keepass_group
+module: keepass.group
 short_description: Manage groups in a KeePass (kdbx) database.
 version_added: "1.0"
 description:
@@ -100,7 +100,7 @@ author:
 
 EXAMPLES = '''
 - name: Create a new group in KeePass under existing path
-  keepass_group:
+  keepass.group:
     action: create
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
@@ -115,7 +115,7 @@ EXAMPLES = '''
     var: group
 
 - name: Create a new group in KeePass under none existing path
-  keepass_group:
+  keepass.group:
     action: create
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
@@ -130,7 +130,7 @@ EXAMPLES = '''
     var: group
 
 - name: Modify a groupname in KeePass
-  keepass_group:
+  keepass.group:
     action: modify
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
@@ -144,7 +144,7 @@ EXAMPLES = '''
     var: group
 
 - name: Delete a group in KeePass
-  keepass_group:
+  keepass.group:
     action: delete
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"

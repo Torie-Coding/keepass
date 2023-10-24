@@ -46,7 +46,7 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
 
 ```yaml
 - name: Create a new entry in KeePass
-  keepass_entry:
+  keepass.entry:
     action: create
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
@@ -59,7 +59,7 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
   register: entry
 
 - name: Create a new entry in KeePass with generated password
-  keepass_entry:
+  keepass.entry:
     action: create
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
@@ -72,7 +72,7 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
   register: entry
 
 - name: Modify the URL of an entry in KeePass
-  keepass_entry:
+  keepass.entry:
     action: modify
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
@@ -84,7 +84,7 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
     var: entry
 
 - name: Delete an entry in KeePass
-  keepass_entry:
+  keepass.entry:
     action: delete
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
@@ -116,7 +116,7 @@ This Ansible module allows you to manage groups in a KeePass (kdbx) database.
 
 ```yaml
 - name: Create a new group in KeePass
-  keepass_group:
+  keepass.group:
     action: create
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
@@ -131,7 +131,7 @@ This Ansible module allows you to manage groups in a KeePass (kdbx) database.
     var: group
 
 - name: Modify a group name in KeePass
-  keepass_group:
+  keepass.group:
     action: modify
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
@@ -144,7 +144,7 @@ This Ansible module allows you to manage groups in a KeePass (kdbx) database.
     var: group
 
 - name: Delete a group in KeePass
-  keepass_group:
+  keepass.group:
     action: delete
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"

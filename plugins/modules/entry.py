@@ -32,7 +32,7 @@ ANSIBLE_METADATA = {
 
 DOCUMENTATION = '''
 ---
-module: keepass_entry
+module: keepass.entry
 short_description: Manage entries in a KeePass (kdbx) database.
 version_added: "1.0"
 description:
@@ -99,7 +99,7 @@ author:
 
 EXAMPLES = '''
 - name: Create a new entry in KeePass
-  keepass_entry:
+  keepass.entry:
     action: create
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
@@ -115,7 +115,7 @@ EXAMPLES = '''
     var: entry
 
 - name: Modify the url of an entry in KeePass
-  keepass_entry:
+  keepass.entry:
     action: modify
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"
@@ -128,7 +128,7 @@ EXAMPLES = '''
     var: entry
 
 - name: Delete an entry in KeePass
-  keepass_entry:
+  keepass.entry:
     action: delete
     database: /path/to/keepass.kdbx
     database_password: "your_database_password"

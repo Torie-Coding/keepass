@@ -1,0 +1,9 @@
+bugfixes:
+  - entry - icon_id var was defined as 'str' but has to be 'int'
+
+minor_changes:
+  - entry,group, README - fixed 
+
+release_summary: |
+   | Release Date: 2023-10-24
+   | Fixed docs and wrong var type

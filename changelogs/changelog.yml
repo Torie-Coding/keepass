@@ -59,3 +59,35 @@ releases:
     fragments:
     - 5-Nested-group-structure-support.yml
     release_date: '2023-10-19'
+  1.1.1:
+    changes:
+      release_summary: '| Release Date: 2023-10-24
+
+        | Due to problems with Ansible Galaxy-NG we have to create a no Version to
+        be able to upload to Galaxy-NG'
+    fragments:
+    - change-version-for-release-1.1.0.yml
+    release_date: '2023-10-24'
+  1.1.2:
+    changes:
+      bugfixes:
+      - entry - icon_id var was defined as 'str' but has to be 'int'
+      minor_changes:
+      - entry,group, README - fixed
+      release_summary: '| Release Date: 2023-10-24
+
+        | Fixed docs and wrong var type'
+    fragments:
+    - 11-when-icon_id-is-set-it-returns-an-error.yml
+    release_date: '2023-10-24'
+  1.1.3:
+    changes:
+      bugfixes:
+      - entry - icon_id var was called as 'id' but has to be 'str'
+      - group - icon_id var was called as 'id' but has to be 'str'
+      release_summary: '| Release Date: 2023-10-24
+
+        | Fixed wrong var type in the add_group and add_entry calls'
+    fragments:
+    - fix-icon-not-string-in-add-group-and-entry.yml
+    release_date: '2023-10-24'

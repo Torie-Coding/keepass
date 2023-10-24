@@ -32,7 +32,7 @@ ANSIBLE_METADATA = {
 
 DOCUMENTATION = '''
 ---
-module: keepass.entry
+module: entry
 short_description: Manage entries in a KeePass (kdbx) database.
 version_added: "1.0"
 description:
@@ -99,9 +99,9 @@ author:
 
 EXAMPLES = '''
 - name: Create a new entry in KeePass
-  keepass.entry:
+  torie_coding.keepass.entry:
     action: create
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     title: MyNewEntry
     username: myusername
@@ -115,9 +115,9 @@ EXAMPLES = '''
     var: entry
 
 - name: Modify the url of an entry in KeePass
-  keepass.entry:
+  torie_coding.keepass.entry:
     action: modify
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     title: MyNewEntry
     url: https://example.com
@@ -128,9 +128,9 @@ EXAMPLES = '''
     var: entry
 
 - name: Delete an entry in KeePass
-  keepass.entry:
+  torie_coding.keepass.entry:
     action: delete
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     title: MyNewEntry
     group_path: foo/bar

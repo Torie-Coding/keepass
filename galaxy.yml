@@ -61,6 +61,7 @@ homepage: https://github.com/Torie-Coding/keepass
 # and '.git' are always filtered. Mutually exclusive with 'manifest'
 build_ignore:
   - ansible.cfg
+  - .gitignore
 
 # A dict controlling use of manifest directives used in building the collection artifact. The key 'directives' is a
 # list of MANIFEST.in style

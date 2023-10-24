@@ -32,7 +32,7 @@ ANSIBLE_METADATA = {
 
 DOCUMENTATION = '''
 ---
-module: keepass_group
+module: group
 short_description: Manage groups in a KeePass (kdbx) database.
 version_added: "1.0"
 description:
@@ -100,9 +100,9 @@ author:
 
 EXAMPLES = '''
 - name: Create a new group in KeePass under existing path
-  keepass_group:
+  torie_coding.keepass.group:
     action: create
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     name: MyNewGroup
     icon_id: 48
@@ -115,9 +115,9 @@ EXAMPLES = '''
     var: group
 
 - name: Create a new group in KeePass under none existing path
-  keepass_group:
+  torie_coding.keepass.group:
     action: create
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     name: MyNewGroup
     icon_id: 48
@@ -130,9 +130,9 @@ EXAMPLES = '''
     var: group
 
 - name: Modify a groupname in KeePass
-  keepass_group:
+  torie_coding.keepass.group:
     action: modify
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     name: MyNewGroup
     new_name: MyAwsomeNewGroup
@@ -144,9 +144,9 @@ EXAMPLES = '''
     var: group
 
 - name: Delete a group in KeePass
-  keepass_group:
+  torie_coding.keepass.group:
     action: delete
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     name: MyAwsomeNewGroup
     path: foo/bar

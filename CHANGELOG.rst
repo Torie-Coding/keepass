@@ -5,6 +5,25 @@ Torie_Coding.Keepass Release Notes
 .. contents:: Topics
 
 
+v1.1.2
+======
+
+Release Summary
+---------------
+
+| Release Date: 2023-10-24
+| Fixed docs and wrong var type
+
+Minor Changes
+-------------
+
+- entry,group, README - fixed
+
+Bugfixes
+--------
+
+- entry - icon_id var was defined as 'str' but has to be 'int'
+
 v1.1.1
 ======
 

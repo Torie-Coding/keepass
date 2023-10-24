@@ -68,3 +68,15 @@ releases:
     fragments:
     - change-version-for-release-1.1.0.yml
     release_date: '2023-10-24'
+  1.1.2:
+    changes:
+      bugfixes:
+      - entry - icon_id var was defined as 'str' but has to be 'int'
+      minor_changes:
+      - entry,group, README - fixed
+      release_summary: '| Release Date: 2023-10-24
+
+        | Fixed docs and wrong var type'
+    fragments:
+    - 11-when-icon_id-is-set-it-returns-an-error.yml
+    release_date: '2023-10-24'

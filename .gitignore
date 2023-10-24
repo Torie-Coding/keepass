@@ -6,3 +6,4 @@ changelogs/.plugin-cache.yaml
 *.tar.gz
 .vscode
 .vscode/settings.json
+collections

@@ -46,9 +46,9 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
 
 ```yaml
 - name: Create a new entry in KeePass
-  keepass_entry:
+  torie_coding.keepass.entry:
     action: create
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     title: MyNewEntry
     username: myusername
@@ -59,9 +59,9 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
   register: entry
 
 - name: Create a new entry in KeePass with generated password
-  keepass_entry:
+  torie_coding.keepass.entry:
     action: create
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     title: MyNewEntry
     username: myusername
@@ -72,9 +72,9 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
   register: entry
 
 - name: Modify the URL of an entry in KeePass
-  keepass_entry:
+  torie_coding.keepass.entry:
     action: modify
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     title: MyNewEntry
     url: https://example.com
@@ -84,9 +84,9 @@ This Ansible module allows you to manage entries in a KeePass (kdbx) database.
     var: entry
 
 - name: Delete an entry in KeePass
-  keepass_entry:
+  torie_coding.keepass.entry:
     action: delete
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     title: MyNewEntry
   register: entry
@@ -116,9 +116,9 @@ This Ansible module allows you to manage groups in a KeePass (kdbx) database.
 
 ```yaml
 - name: Create a new group in KeePass
-  keepass_group:
+  torie_coding.keepass.group:
     action: create
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     name: MyNewGroup
     icon_id: 49
@@ -131,9 +131,9 @@ This Ansible module allows you to manage groups in a KeePass (kdbx) database.
     var: group
 
 - name: Modify a group name in KeePass
-  keepass_group:
+  torie_coding.keepass.group:
     action: modify
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     name: MyNewGroup
     new_name: MyAwesomeNewGroup
@@ -144,9 +144,9 @@ This Ansible module allows you to manage groups in a KeePass (kdbx) database.
     var: group
 
 - name: Delete a group in KeePass
-  keepass_group:
+  torie_coding.keepass.group:
     action: delete
-    database: /path/to/keepass.kdbx
+    database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
     name: MyAwesomeNewGroup
     group_path: foo/bar/MyGroup

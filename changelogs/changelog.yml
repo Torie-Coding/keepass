@@ -59,3 +59,12 @@ releases:
     fragments:
     - 5-Nested-group-structure-support.yml
     release_date: '2023-10-19'
+  1.1.1:
+    changes:
+      release_summary: '| Release Date: 2023-10-24
+
+        | Due to problems with Ansible Galaxy-NG we have to create a no Version to
+        be able to upload to Galaxy-NG'
+    fragments:
+    - change-version-for-release-1.1.0.yml
+    release_date: '2023-10-24'

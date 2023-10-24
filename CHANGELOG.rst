@@ -5,6 +5,15 @@ Torie_Coding.Keepass Release Notes
 .. contents:: Topics
 
 
+v1.1.1
+======
+
+Release Summary
+---------------
+
+| Release Date: 2023-10-24
+| Due to problems with Ansible Galaxy-NG we have to create a no Version to be able to upload to Galaxy-NG
+
 v1.1.0
 ======
 

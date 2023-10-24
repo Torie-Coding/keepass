@@ -177,7 +177,7 @@ def main():
         username=dict(type='str', required=True),
         url=dict(type='str', required=False),
         group_path=dict(type='str', required=False),
-        icon_id=dict(type='str', required=False),
+        icon_id=dict(type='int', required=False),
         action=dict(type='str', required=True),
 
     )

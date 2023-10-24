@@ -5,6 +5,21 @@ Torie_Coding.Keepass Release Notes
 .. contents:: Topics
 
 
+v1.1.3
+======
+
+Release Summary
+---------------
+
+| Release Date: 2023-10-24
+| Fixed wrong var type in the add_group and add_entry calls
+
+Bugfixes
+--------
+
+- entry - icon_id var was called as 'id' but has to be 'str'
+- group - icon_id var was called as 'id' but has to be 'str'
+
 v1.1.2
 ======
 

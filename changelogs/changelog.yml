@@ -91,3 +91,16 @@ releases:
     fragments:
     - fix-icon-not-string-in-add-group-and-entry.yml
     release_date: '2023-10-24'
+  1.1.4:
+    changes:
+      bugfixes:
+      - group - creating a group under root directory results in nontype value
+      minor_changes:
+      - entry - added feature to create custom notes
+      release_summary: '| Release Date: 2023-10-25
+
+        | Fixed creating group unter root group and added feature in entry to create
+        custom notes'
+    fragments:
+    - fix-issue-16-and-add-feature-17.yml
+    release_date: '2023-10-25'

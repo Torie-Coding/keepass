@@ -1,0 +1,9 @@
+bugfixes:
+  - group - creating a group under root directory results in nontype value
+
+minor_changes:
+  - entry - added feature to create custom notes
+
+release_summary: |
+   | Release Date: 2023-10-25
+   | Fixed creating group unter root group and added feature in entry to create custom notes

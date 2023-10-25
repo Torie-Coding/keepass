@@ -5,6 +5,25 @@ Torie_Coding.Keepass Release Notes
 .. contents:: Topics
 
 
+v1.1.4
+======
+
+Release Summary
+---------------
+
+| Release Date: 2023-10-25
+| Fixed creating group unter root group and added feature in entry to create custom notes
+
+Minor Changes
+-------------
+
+- entry - added feature to create custom notes
+
+Bugfixes
+--------
+
+- group - creating a group under root directory results in nontype value
+
 v1.1.3
 ======
 

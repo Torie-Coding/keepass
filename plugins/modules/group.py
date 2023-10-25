@@ -250,10 +250,7 @@ def main():
         directory_list = []
     else:
     # remove slashes at the beginning, the end and dobble slashes, that will cause problems
-        directory_list = path.split("/")
-        for idx, dir in enumerate(directory_list):
-            if dir == "":
-                directory_list.pop(idx)
+        directory_list = [d for d in path.split("/") if d]
 
     if action.lower() == "create":
 

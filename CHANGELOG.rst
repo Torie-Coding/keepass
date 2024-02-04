@@ -5,6 +5,22 @@ Torie_Coding.Keepass Release Notes
 .. contents:: Topics
 
 
+v1.1.5
+======
+
+Release Summary
+---------------
+
+| Release Date: 2024-02-04
+| Fixed behavior when no icon_id provided
+
+
+Bugfixes
+--------
+
+- entry - None value for icon_id did result in a database error. None values are possible now. Thanks to @kism
+- group - None value for icon_id did result in a database error. None values are possible now. Thanks to @kism
+
 v1.1.4
 ======
 

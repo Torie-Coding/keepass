@@ -1,0 +1,7 @@
+bugfixes:
+  - entry - None value for icon_id did result in a database error. None values are possible now. Thanks to @kism
+  - group - None value for icon_id did result in a database error. None values are possible now. Thanks to @kism
+
+release_summary: |
+   | Release Date: 2024-02-04
+   | Fixed behavior when no icon_id provided

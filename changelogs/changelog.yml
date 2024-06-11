@@ -119,3 +119,23 @@ releases:
     fragments:
     - Fixed-behavior-when-no-icon-id-provided-21.yml
     release_date: '2024-02-04'
+  1.2.0:
+    changes:
+      major_changes:
+      - added lookup plugin for entries
+      minor_changes:
+      - entry and group examples added 'keyfile' example
+      - modifed README.md to include changes
+      release_summary: '| Release Date: 2024-06-11
+
+        | Added lookup plugin for entries and fixed docs
+
+        '
+    fragments:
+    - 8-add-lookup-functionality.yml
+    plugins:
+      lookup:
+      - description: Search for Entries in a KeePass Database
+        name: lookup
+        namespace: null
+    release_date: '2024-06-11'

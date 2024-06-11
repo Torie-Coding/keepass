@@ -1,4 +1,4 @@
-spielen.yml
+spielen
 .git
 venv
 .nox
@@ -7,3 +7,4 @@ changelogs/.plugin-cache.yaml
 .vscode
 .vscode/settings.json
 collections
+lint.pylintrc

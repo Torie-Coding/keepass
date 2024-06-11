@@ -139,6 +139,7 @@ EXAMPLES = '''
     action: delete
     database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
+    keyfile: /path/to/KeyFile
     title: MyNewEntry
     group_path: foo/bar
   register: entry
@@ -184,7 +185,7 @@ def main():
         database_password=dict(type='str', required=False, default=None, no_log=True),
         password=dict(type='str', required=False, default=None, no_log=True),
         password_length=dict(type='int', required=False, no_log=False),
-        username=dict(type='str', required=False),
+        username=dict(type='str', required=True),
         url=dict(type='str', required=False),
         group_path=dict(type='str', required=False),
         icon_id=dict(type='int', required=False),
@@ -334,12 +335,6 @@ def main():
             kp.delete_entry(entry=entry)
             kp.save()
             module.exit_json(changed=True)
-
-    elif action.lower() == "view":
-        result = []
-        for entry in group.entries:
-            result.append(set_result(entry, False))
-        module.exit_json(results=result)
 
     else:
         module.fail_json(msg='No action matched', exception=traceback.format_exc())

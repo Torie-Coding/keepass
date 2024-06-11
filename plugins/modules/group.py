@@ -135,6 +135,7 @@ EXAMPLES = '''
     action: modify
     database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
+    keyfile: /path/to/KeyFile
     name: MyNewGroup
     new_name: MyAwsomeNewGroup
     icon_id: 50

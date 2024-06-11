@@ -62,6 +62,11 @@ homepage: https://github.com/Torie-Coding/keepass
 build_ignore:
   - ansible.cfg
   - .gitignore
+  - .git
+  - .vscode
+  - venv
+  - *.pylintrc
+  - spielen
 
 # A dict controlling use of manifest directives used in building the collection artifact. The key 'directives' is a
 # list of MANIFEST.in style

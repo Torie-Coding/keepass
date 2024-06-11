@@ -1,9 +1,36 @@
-==================================
-Torie_Coding.Keepass Release Notes
-==================================
+===================================
+Torie\_Coding.Keepass Release Notes
+===================================
 
 .. contents:: Topics
 
+v1.2.0
+======
+
+Release Summary
+---------------
+
+| Release Date: 2024-06-11
+| Added lookup plugin for entries and fixed docs
+
+Major Changes
+-------------
+
+- added lookup plugin for entries
+
+Minor Changes
+-------------
+
+- entry and group examples added 'keyfile' example
+- modifed README.md to include changes
+
+New Plugins
+-----------
+
+Lookup
+~~~~~~
+
+- torie_coding.keepass.lookup - Search for Entries in a KeePass Database
 
 v1.1.5
 ======
@@ -13,7 +40,6 @@ Release Summary
 
 | Release Date: 2024-02-04
 | Fixed behavior when no icon_id provided
-
 
 Bugfixes
 --------

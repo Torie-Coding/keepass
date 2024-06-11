@@ -60,6 +60,11 @@ options:
             - Username of the entry.
         required: true
         type: str
+    password:
+        description:
+            - Password to be set.
+        required: false
+        type: str
     database_password:
         description:
             - Database password. Either this or 'keyfile' (or both) are required.

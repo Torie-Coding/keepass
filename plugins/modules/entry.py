@@ -139,6 +139,7 @@ EXAMPLES = '''
     action: delete
     database: /path/to/KeePass_database.kdbx
     database_password: "your_database_password"
+    keyfile: /path/to/KeyFile
     title: MyNewEntry
     group_path: foo/bar
   register: entry

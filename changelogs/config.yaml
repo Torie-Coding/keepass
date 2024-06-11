@@ -4,7 +4,7 @@ changes_file: changelog.yml
 changes_format: combined
 ignore_other_fragment_extensions: true
 keep_fragments: false
-archive_path_template: "{version}-archive"
+archive_path_template: "archive/{version}-archive"
 mention_ancestor: true
 new_plugins_after_name: removed_features
 notesdir: fragments

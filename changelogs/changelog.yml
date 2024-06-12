@@ -139,3 +139,12 @@ releases:
         name: lookup
         namespace: null
     release_date: '2024-06-11'
+  1.2.1:
+    changes:
+      minor_changes:
+      - group - fixed modify action.
+      release_summary: "| Release Date: 2024-06-12\n| Added group - fixed modify action.
+        \n"
+    fragments:
+    - 26-Entry Modify doesnt work because of icon_id failurey.yml
+    release_date: '2024-06-12'

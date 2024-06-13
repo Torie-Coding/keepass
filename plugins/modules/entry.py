@@ -94,10 +94,9 @@ options:
         type: str
     icon_id:
         description:
-            - Icon ID to be associated with the entry.
+            - Icon ID to be associated with the entry. When creating a new entry the default will be '58'.
         required: false
-        type: str
-        default: 58
+        type: int
     action:
         description:
             - The action to perform (create, modify, delete).
@@ -257,8 +256,6 @@ def main():
     if icon_id is not None:
         if icon_id > 68:
             module.fail_json(msg='Icon_id out of range. Choose a value between 0 and 68', exception=traceback.format_exc())
-    else:
-        icon_id = 58
 
     if not group_path:
         directory_list = []
@@ -286,6 +283,9 @@ def main():
                 password = generate_password(password_length)
             else:
                 password = generate_password(20)
+
+        if not icon_id:
+            icon_id = 58
 
         if not module.check_mode:
             try:
@@ -325,7 +325,7 @@ def main():
                 entry.notes = notes
 
             if icon_id:
-                entry.icon = icon_id
+                entry.icon = str(icon_id)
 
             kp.save()
 

@@ -7,10 +7,9 @@
 
 # Make coding more python3-ish
 from __future__ import absolute_import, division, print_function
+import traceback
 
 __metaclass__ = type
-
-import traceback
 
 from ansible.module_utils.basic import AnsibleModule, missing_required_lib
 
@@ -94,9 +93,10 @@ options:
         type: str
     icon_id:
         description:
-            - Icon ID to be associated with the entry. When creating a new entry the default will be '58'.
+            - Icon ID to be associated with the entry.
         required: false
-        type: int
+        type: str
+        default: 58
     action:
         description:
             - The action to perform (create, modify, delete).
@@ -254,8 +254,10 @@ def main():
         module.fail_json(msg='Could not open the database, as the checksum of the database is wrong. This could be caused by a corrupt database.')
 
     if icon_id is not None:
-        if icon_id > 68:
+        if int(icon_id) > 68:
             module.fail_json(msg='Icon_id out of range. Choose a value between 0 and 68', exception=traceback.format_exc())
+    else:
+        icon_id = 58
 
     if not group_path:
         directory_list = []
@@ -283,9 +285,6 @@ def main():
                 password = generate_password(password_length)
             else:
                 password = generate_password(20)
-
-        if not icon_id:
-            icon_id = 58
 
         if not module.check_mode:
             try:

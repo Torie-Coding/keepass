@@ -4,6 +4,20 @@ Torie\_Coding.Keepass Release Notes
 
 .. contents:: Topics
 
+v1.2.2
+======
+
+Release Summary
+---------------
+
+| Release Date: 2024-06-13
+| entry - fixed modify action. 
+
+Minor Changes
+-------------
+
+- entry - fixed modify action.
+
 v1.2.1
 ======
 

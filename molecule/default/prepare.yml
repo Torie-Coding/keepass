@@ -1,0 +1,23 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+
+    - name: Install Python3.11
+      ansible.builtin.apt:
+        name: python3.11
+        state: present
+
+    - name: Install pip packages
+      ansible.builtin.pip:
+        name:
+          - pykeepass
+          - ansible
+        state: present
+
+    - name: Install torie_coding.keepass ansible collection
+      community.general.ansible_galaxy_install:
+        name: torie_coding.keepass
+        type: collection

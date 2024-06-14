@@ -1,0 +1,110 @@
+---
+- name: Create a new group in KeePass under existing path
+  torie_coding.keepass.group:
+    action: create
+    database: "{{ keepass_database }}"
+    database_password: "{{ keepass_password }}"
+    name: MyNewGroup
+    icon_id: 48
+    notes: This is a new group created by Ansible.
+    path: General
+    create_path: false
+  register: group_creation
+
+- name: Verify group creation
+  ansible.builtin.assert:
+    that:
+      - group_creation.changed
+      - group_creation.failed == False
+      - group_creation.name == "MyNewGroup"
+      - group_creation.full_path == "General/MyNewGroup/"
+      - group_creation.notes == "This is a new group created by Ansible."
+      - group_creation.icon_id == "48"
+
+- name: Create a new group in KeePass under none existing path
+  torie_coding.keepass.group:
+    action: create
+    database: "{{ keepass_database }}"
+    database_password: "{{ keepass_password }}"
+    name: MyNewGroup
+    icon_id: 48
+    notes: This is a new group created by Ansible.
+    path: foo/bar/
+    create_path: true
+  register: group_modification_2
+
+- name: Verify group creation under none existing path
+  ansible.builtin.assert:
+    that:
+      - group_creation.changed
+      - group_modification_2.failed == False
+      - group_modification_2.full_path == "foo/bar/MyNewGroup/"
+      - group_modification_2.notes == "This is a new group created by Ansible."
+      - group_modification_2.icon_id == "48"
+      - group_modification_2.name == "MyNewGroup"
+
+- name: Modify a groupname in KeePass
+  torie_coding.keepass.group:
+    action: modify
+    database: "{{ keepass_database }}"
+    database_password: "{{ keepass_password }}"
+    name: MyNewGroup
+    new_name: MyAwsomeNewGroup
+    icon_id: 50
+    path: foo/bar/
+  register: group_modification
+
+- name: Verify group modification 
+  ansible.builtin.assert:
+    that:
+      - group_creation.changed
+      - group_modification.failed == False
+      - group_modification.full_path == "foo/bar/MyAwsomeNewGroup/"
+      - group_modification.notes == "This is a new group created by Ansible."
+      - group_modification.icon_id == "50"
+      - group_modification.name == "MyAwsomeNewGroup"
+
+- name: Delete a group in KeePass
+  torie_coding.keepass.group:
+    action: delete
+    database: "{{ keepass_database }}"
+    database_password: "{{ keepass_password }}"
+    name: MyNewGroup
+    path: General
+  register: group_deletion0
+
+- name: Verify group deletion
+  ansible.builtin.assert:
+    that:
+      - group_deletion0.changed
+      - group_deletion0.failed == False
+
+- name: Delete other groups1 in KeePass
+  torie_coding.keepass.group:
+    action: delete
+    database: "{{ keepass_database }}"
+    database_password: "{{ keepass_password }}"
+    name: bar
+    path: /foo/
+  register: group_deletion1
+
+- name: Verify group1 deletion
+  ansible.builtin.assert:
+    that:
+      - group_deletion1.changed
+      - group_deletion1.failed == False
+
+- name: Delete other groups2 in KeePass
+  torie_coding.keepass.group:
+    action: delete
+    database: "{{ keepass_database }}"
+    database_password: "{{ keepass_password }}"
+    name: foo
+    path: /
+  register: group_deletion2
+
+- name: Verify group2 deletion
+  ansible.builtin.assert:
+    that:
+      - group_deletion2.changed
+      - group_deletion2.failed == False

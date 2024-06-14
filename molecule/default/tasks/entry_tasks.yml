@@ -1,0 +1,61 @@
+---
+- name: Create a new KeePass entry
+  torie_coding.keepass.entry:
+    action: create
+    database: "{{ keepass_database }}"
+    database_password: "{{ keepass_password }}"
+    title: MyNewEntry
+    username: myusername
+    password: mypassword
+    url: https://example.com
+    notes: This is a new entry created by Ansible.
+    group_path: General
+    icon_id: 48
+  register: entry_creation
+
+- name: Verify entry creation
+  ansible.builtin.assert:
+    that:
+      - entry_creation.failed == False
+      - entry_creation.title == "MyNewEntry"
+      - entry_creation.username == "myusername"
+      - entry_creation.url == "https://example.com"
+      - entry_creation.notes == "This is a new entry created by Ansible."
+      - entry_creation.group_path == "General/"
+      - entry_creation.icon_id == "48"
+
+- name: Modify the URL of an entry in KeePass
+  torie_coding.keepass.entry:
+    action: modify
+    username: myusername
+    database: "{{ keepass_database }}"
+    database_password: "{{ keepass_password }}"
+    group_path: General
+    title: MyNewEntry
+    icon_id: 50
+    url: "https://modified-example.com"
+  register: entry_modification
+
+- name: Verify entry modification
+  ansible.builtin.assert:
+    that:
+      - entry_modification.changed
+      - entry_modification.failed == False
+      - entry_modification.title == "MyNewEntry"
+      - entry_modification.url == "https://modified-example.com"
+
+- name: Delete a KeePass entry
+  torie_coding.keepass.entry:
+    action: delete
+    database: "{{ keepass_database }}"
+    database_password: "{{ keepass_password }}"
+    title: MyNewEntry
+    group_path: General
+    username: myusername
+  register: entry_deletion
+
+- name: Verify entry deletion
+  ansible.builtin.assert:
+    that:
+      - entry_deletion.changed
+      - entry_deletion.failed == False

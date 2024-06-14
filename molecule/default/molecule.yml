@@ -1,0 +1,31 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+platforms:
+  - name: instance
+    image: geerlingguy/docker-debian12-ansible:latest
+    privileged: true
+    pre_build_image: true
+    cgroupns_mode: host
+    volumes:
+      - ${MOLECULE_PROJECT_DIRECTORY}/molecule/default/resources/CI_CD_Database.kdbx:/root/CI_CD_Database.kdbx
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+provisioner:
+  name: ansible
+  # env:
+  #   ANSIBLE_VERBOSITY: 4
+verifier:
+  name: ansible
+scenario:
+  name: default
+  test_sequence:
+    - create
+    - prepare
+    - converge
+    - destroy

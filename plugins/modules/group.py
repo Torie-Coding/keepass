@@ -64,7 +64,7 @@ options:
         description:
             - Icon ID to be associated with the group.
         required: false
-        type: str
+        type: int
         default: 48
     action:
         description:
@@ -183,7 +183,7 @@ def main():
         name=dict(type='str', required=True),
         keyfile=dict(type='str', required=False, default=None),
         database_password=dict(type='str', required=False, default=None, no_log=True),
-        icon_id=dict(type='str', required=False),
+        icon_id=dict(type='int', required=False),
         action=dict(type='str', required=True),
         notes=dict(type='str', required=False),
         new_name=dict(type='str', required=False),
@@ -310,7 +310,7 @@ def main():
                 group.notes = notes
 
             if icon_id:
-                group.icon = icon_id
+                group.icon = str(icon_id)
 
             if new_name:
                 group.name = new_name

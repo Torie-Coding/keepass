@@ -95,7 +95,7 @@ options:
         description:
             - Icon ID to be associated with the entry.
         required: false
-        type: str
+        type: int
         default: 58
     action:
         description:
@@ -254,7 +254,7 @@ def main():
         module.fail_json(msg='Could not open the database, as the checksum of the database is wrong. This could be caused by a corrupt database.')
 
     if icon_id is not None:
-        if int(icon_id) > 68:
+        if icon_id > 68:
             module.fail_json(msg='Icon_id out of range. Choose a value between 0 and 68', exception=traceback.format_exc())
     else:
         icon_id = 58

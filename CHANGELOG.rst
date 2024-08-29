@@ -5,6 +5,21 @@ Torie_Coding.Keepass Release Notes
 .. contents:: Topics
 
 
+v1.3.1
+======
+
+Release Summary
+---------------
+
+| Release Date: 2024-08-29
+| fixed tags for galaxy
+
+
+Minor Changes
+-------------
+
+- fixed tags for galaxy
+
 v1.3.0
 ======
 

@@ -1,0 +1,17 @@
+---
+- name: Install pykeepass
+  ansible.builtin.pip:
+    name: pykeepass
+    state: present
+
+- name: Install torie_coding.keepass ansible collection
+  community.general.ansible_galaxy_install:
+    name: torie_coding.keepass
+    type: collection
+
+- name: Test
+  ansible.builtin.shell:
+    cmd: "ansible-galaxy collection list | grep torie"
+  register: cmd
+
+- debug: var=cmd

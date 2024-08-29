@@ -3,6 +3,9 @@
   hosts: all
   gather_facts: false
   become: true
+  vars:
+    keepass_database: "/root/CI_CD_Database.kdbx"
+    keepass_password: "ansible"
   tasks:
 
     - name: Install Python3.11

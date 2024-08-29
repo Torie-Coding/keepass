@@ -1,8 +1,24 @@
-===================================
-Torie\_Coding.Keepass Release Notes
-===================================
+==================================
+Torie_Coding.Keepass Release Notes
+==================================
 
 .. contents:: Topics
+
+
+v1.3.0
+======
+
+Release Summary
+---------------
+
+| Release Date: 2024-08-29
+| lookup - reworked lookup plugin
+
+
+Bugfixes
+--------
+
+- lookup - plugin returned nothing
 
 v1.2.2
 ======
@@ -12,6 +28,7 @@ Release Summary
 
 | Release Date: 2024-06-13
 | entry - fixed modify action. 
+
 
 Minor Changes
 -------------
@@ -27,6 +44,7 @@ Release Summary
 | Release Date: 2024-06-12
 | Added group - fixed modify action. 
 
+
 Minor Changes
 -------------
 
@@ -40,6 +58,7 @@ Release Summary
 
 | Release Date: 2024-06-11
 | Added lookup plugin for entries and fixed docs
+
 
 Major Changes
 -------------
@@ -68,6 +87,7 @@ Release Summary
 
 | Release Date: 2024-02-04
 | Fixed behavior when no icon_id provided
+
 
 Bugfixes
 --------

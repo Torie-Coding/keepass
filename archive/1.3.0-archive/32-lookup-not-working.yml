@@ -1,0 +1,6 @@
+bugfixes:
+  - lookup - plugin returned nothing
+
+release_summary: |
+   | Release Date: 2024-08-29
+   | lookup - reworked lookup plugin

@@ -54,7 +54,7 @@
     path: foo/bar/
   register: group_modification
 
-- name: Verify group modification 
+- name: Verify group modification
   ansible.builtin.assert:
     that:
       - group_creation.changed

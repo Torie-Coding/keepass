@@ -8,7 +8,7 @@ namespace: torie_coding
 name: keepass
 
 # The version of the collection. Must be compatible with semantic versioning
-version: 1.2.2
+version: 1.3.0
 
 # The path to the Markdown (.md) readme file. This path is relative to the root of the collection
 readme: README.md
@@ -22,7 +22,7 @@ authors:
 
 ### OPTIONAL but strongly recommended
 # A short summary description of the collection
-description: Modifys and create entrys and groups in a keepass file
+description: Modifys and create entrys and groups in a keepass file. Can also lookup entries and groups.
 
 # Either a single license or a list of licenses for content inside of a collection. Ansible Galaxy currently only
 # accepts L(SPDX,https://spdx.org/licenses/) licenses. This key is mutually exclusive with 'license_file'
@@ -36,6 +36,9 @@ license_file: 'LICENSE'
 tags:
   - keepass
   - passwortverwaltung
+  - password managment
+  - user creation
+  - group creation
 
 # Collections that this collection requires to be installed for it to be usable. The key of the dict is the
 # collection label 'namespace.name'. The value is a version range

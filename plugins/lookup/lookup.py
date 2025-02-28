@@ -229,7 +229,7 @@ class LookupModule(LookupBase):
                     self._display.vvv(f"Skipping non-entry object: {entry}")
 
         self._display.v("Final search parameters used: {}".format(kwargs))
-        return ret # if type(ret) is list
+        return ret
 
     def match_entry(self, entry, title, username, notes, url, tags, regex):
         """Helper function to match entries against the search criteria."""

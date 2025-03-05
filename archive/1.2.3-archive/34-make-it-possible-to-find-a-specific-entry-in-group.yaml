@@ -1,0 +1,6 @@
+minor_changes:
+  - lookup - Make it possible to find a specific entry in a certain group.
+
+release_summary: |
+  | Release Date: 2025-03-05
+  | lookup - Make it possible to find a specific entry in a certain group.

@@ -157,3 +157,13 @@ releases:
     fragments:
     - breaking-fix-entry-modify.yml
     release_date: '2024-06-13'
+  1.2.3:
+    changes:
+      minor_changes:
+      - lookup - Make it possible to find a specific entry in a certain group.
+      release_summary: '| Release Date: 2025-03-05
+
+        | lookup - Make it possible to find a specific entry in a certain group.'
+    fragments:
+    - 34-make-it-possible-to-find-a-specific-entry-in-group.yaml
+    release_date: '2025-03-05'

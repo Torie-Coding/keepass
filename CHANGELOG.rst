@@ -4,6 +4,20 @@ Torie\_Coding.Keepass Release Notes
 
 .. contents:: Topics
 
+v1.2.3
+======
+
+Release Summary
+---------------
+
+| Release Date: 2025-03-05
+| lookup - Make it possible to find a specific entry in a certain group.
+
+Minor Changes
+-------------
+
+- lookup - Make it possible to find a specific entry in a certain group.
+
 v1.2.2
 ======
 

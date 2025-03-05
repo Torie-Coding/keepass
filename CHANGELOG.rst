@@ -1,9 +1,22 @@
-==================================
-Torie_Coding.Keepass Release Notes
-==================================
+===================================
+Torie\_Coding.Keepass Release Notes
+===================================
 
 .. contents:: Topics
 
+v1.3.2
+======
+
+Release Summary
+---------------
+
+| Release Date: 2025-03-05
+| lookup - Make it possible to find a specific entry in a certain group.
+
+Minor Changes
+-------------
+
+- lookup - Make it possible to find a specific entry in a certain group.
 
 v1.3.1
 ======
@@ -13,7 +26,6 @@ Release Summary
 
 | Release Date: 2024-08-29
 | fixed tags for galaxy
-
 
 Minor Changes
 -------------
@@ -29,7 +41,6 @@ Release Summary
 | Release Date: 2024-08-29
 | lookup - reworked lookup plugin
 
-
 Bugfixes
 --------
 
@@ -43,7 +54,6 @@ Release Summary
 
 | Release Date: 2024-06-13
 | entry - fixed modify action. 
-
 
 Minor Changes
 -------------
@@ -59,7 +69,6 @@ Release Summary
 | Release Date: 2024-06-12
 | Added group - fixed modify action. 
 
-
 Minor Changes
 -------------
 
@@ -73,7 +82,6 @@ Release Summary
 
 | Release Date: 2024-06-11
 | Added lookup plugin for entries and fixed docs
-
 
 Major Changes
 -------------
@@ -102,7 +110,6 @@ Release Summary
 
 | Release Date: 2024-02-04
 | Fixed behavior when no icon_id provided
-
 
 Bugfixes
 --------

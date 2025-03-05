@@ -1,0 +1,82 @@
+---
+    - name: Create a new KeePass entry in root Group
+      torie_coding.keepass.entry:
+        action: create
+        database: "{{ keepass_database }}"
+        database_password: "{{ keepass_password }}"
+        title: MyNewEntry
+        username: myusername
+        password: mypassword
+        url: https://example.com
+        notes: This is my lookup test entry.
+        icon_id: 48
+      register: entry_creation
+
+    - name: Verify root entry creation
+      ansible.builtin.assert:
+        that:
+          - entry_creation.failed == False
+          - entry_creation.title == "MyNewEntry"
+          - entry_creation.username == "myusername"
+          - entry_creation.url == "https://example.com"
+          - entry_creation.notes == "This is my lookup test entry."
+          - entry_creation.group_path == ""
+          - entry_creation.icon_id == "48"
+
+    - name: Lookup created entry in root group
+      ansible.builtin.set_fact:
+        root_group_entry: "{{ lookup('torie_coding.keepass.lookup', 'entry', database=keepass_database, database_password=keepass_password, title='MyNewEntry', recursive=False) }}"
+
+    - name: Verify lookup in root group
+      ansible.builtin.assert:
+        that:
+          - root_group_entry.notes == "This is my lookup test entry."
+
+    - name: Create a new group in KeePass under root group
+      torie_coding.keepass.group:
+        action: create
+        database: "{{ keepass_database }}"
+        database_password: "{{ keepass_password }}"
+        name: Lookup
+        icon_id: 48
+        notes: This is a new group created by Ansible.
+        path: General
+        create_path: false
+      register: group_creation
+
+    - name: Verify group creation
+      ansible.builtin.assert:
+        that:
+          - group_creation.changed
+          - group_creation.failed == False
+          - group_creation.name == "Lookup"
+          - group_creation.full_path == "General/Lookup/"
+          - group_creation.notes == "This is a new group created by Ansible."
+          - group_creation.icon_id == "48"
+
+    - name: Create entries in 'MyNewGroup' to lookup after
+      torie_coding.keepass.entry:
+        action: create
+        database: "{{ keepass_database }}"
+        database_password: "{{ keepass_password }}"
+        title: "{{ item.title }}"
+        username: "{{ item.username }}"
+        password: mypassword
+        url: https://example.com
+        notes: This is a new entry created by Ansible.
+        group_path: General/Lookup/
+        icon_id: 48
+      register: entry_creation
+      loop:
+        - { username: 'testuser1', title: 'wheel' }
+        - { username: 'testuser2', title: 'root' }
+
+    - name: Lookup created entries in other group
+      ansible.builtin.set_fact:
+        other_group_entries: "{{ lookup('torie_coding.keepass.lookup', 'entry', database=keepass_database, database_password=keepass_password, group_path='General/Lookup/') }}"
+
+    - name: Verify lookup in other group
+      ansible.builtin.assert:
+        that:
+          - other_group_entries[0].title == "wheel"
+          - other_group_entries[1].title == "root"

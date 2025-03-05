@@ -169,52 +169,46 @@ class LookupModule(LookupBase):
                 raise AnsibleError("Could not open the database, as the checksum of the database is wrong. This could be caused by a corrupt database.") from exc
 
             entries = []
-            if not any([title, username, notes, url, tags]):
-                if group_path and group_path != "/":
-                    # Split the group_path into a list of group names
-                    group_path_list = group_path.split('/')
-                    self._display.vv("Searching for group path: {}".format(group_path_list))
-                    group = kp.find_groups(path=group_path_list, first=True)
-                    if not group:
-                        raise AnsibleError(f"Group '{group_path}' not found in the database.")
-                    self._display.vv("Group found: {}".format(group))
-                    entries = group.entries  # Return all entries in this group
-                else:
-                    # Search in root group
+            if group_path and group_path != "/":
+                # Split the group_path into a list of group names
+                group_path_list = group_path.split('/')
+                self._display.vv("Searching for group path: {}".format(group_path_list))
+                group = kp.find_groups(path=group_path_list, first=True)
+                if not group:
+                    raise AnsibleError(f"Group '{group_path}' not found in the database.")
+                self._display.vv("Group found: {}".format(group))
+                entries = group.entries  # Return all entries in this group
+            else:
+                # Search in root group
+                if not any([title, username, notes, url, tags]):
                     # Alle Einträge in der Wurzelgruppe zurückgeben
                     self._display.vv("Returning all entries in the root group")
                     entries = kp.entries
-            else:
-                # Filtered search
-                search_params = {
-                    'recursive': recursive,
-                    'regex': regex,
-                }
-                if title:
-                    search_params['title'] = title
-                if username:
-                    search_params['username'] = username
-                if notes:
-                    search_params['notes'] = notes
-                if url:
-                    search_params['url'] = url
-                if tags and tags != ['']:
-                    search_params['tags'] = tags
-                if group_path and group_path != "/":
-                    group = kp.find_groups(name=group_path, first=True)
-                    if not group:
-                        raise AnsibleError(f"Group '{group_path}' not found in the database.")
-                    search_params['group'] = group
-                
-
-                if not recursive and group_path in [None, "/"]:
-                    # Explicit search in the root group if not recursive
-                    self._display.vv("Performing non-recursive search in the root group")
-                    root_group = kp.root_group
-                    entries = [e for e in root_group.entries if self.match_entry(e, title, username, notes, url, tags, regex)]
                 else:
-                    self._display.vv("Search parameters: {}".format(search_params))
-                    entries = kp.find_entries(**search_params)
+                    # Filtered search
+                    search_params = {
+                        'recursive': recursive,
+                        'regex': regex,
+                    }
+                    if title:
+                        search_params['title'] = title
+                    if username:
+                        search_params['username'] = username
+                    if notes:
+                        search_params['notes'] = notes
+                    if url:
+                        search_params['url'] = url
+                    if tags and tags != ['']:
+                        search_params['tags'] = tags
+
+                    if not recursive and group_path in [None, "/"]:
+                        # Explicit search in the root group if not recursive
+                        self._display.vv("Performing non-recursive search in the root group")
+                        root_group = kp.root_group
+                        entries = [e for e in root_group.entries if self.match_entry(e, title, username, notes, url, tags, regex)]
+                    else:
+                        self._display.vv("Search parameters: {}".format(search_params))
+                        entries = kp.find_entries(**search_params)
 
             self._display.vv("Number of entries found: {}".format(len(entries)))
 

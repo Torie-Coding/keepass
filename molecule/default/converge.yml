@@ -14,5 +14,5 @@
       ansible.builtin.import_tasks: tasks/group_tasks.yml
 
     # geht leider nicht... Error opening the database or keyfile: [Errno 13] Permission denied: '/root/CI_CD_Database.kdbx'
-    # - name: Test KeePass Lookup Plugin
-    #   ansible.builtin.import_tasks: tasks/lookup_tasks.yml
+    - name: Test KeePass Lookup Plugin
+      ansible.builtin.import_tasks: tasks/lookup_tasks.yml

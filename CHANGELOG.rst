@@ -4,32 +4,20 @@ Torie_Coding.Keepass Release Notes
 
 .. contents:: Topics
 
-<<<<<<< HEAD
-v1.2.3
-=======
 
 v1.3.1
->>>>>>> origin/main
 ======
 
 Release Summary
 ---------------
 
-<<<<<<< HEAD
-| Release Date: 2025-03-05
-| lookup - Make it possible to find a specific entry in a certain group.
-=======
 | Release Date: 2024-08-29
 | fixed tags for galaxy
 
->>>>>>> origin/main
 
 Minor Changes
 -------------
 
-<<<<<<< HEAD
-- lookup - Make it possible to find a specific entry in a certain group.
-=======
 - fixed tags for galaxy
 
 v1.3.0
@@ -46,7 +34,6 @@ Bugfixes
 --------
 
 - lookup - plugin returned nothing
->>>>>>> origin/main
 
 v1.2.2
 ======

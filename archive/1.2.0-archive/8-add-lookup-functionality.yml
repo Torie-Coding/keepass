@@ -1,0 +1,10 @@
+minor_changes:
+  - entry and group examples added 'keyfile' example
+  - modifed README.md to include changes
+
+major_changes:
+  - added lookup plugin for entries
+
+release_summary: |
+   | Release Date: 2024-06-11
+   | Added lookup plugin for entries and fixed docs

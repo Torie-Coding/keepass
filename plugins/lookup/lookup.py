@@ -85,7 +85,7 @@ options:
       type: list
       elements: str
       required: False
-      default: ['']
+      default: Null
     username:
       description: Filter entries by username
       type: str
@@ -205,7 +205,10 @@ class LookupModule(LookupBase):
                 if tags and tags != ['']:
                     search_params['tags'] = tags
                 if group_path and group_path != "/":
-                    group = kp.find_groups(name=group_path, first=True)
+                    # Split the group_path into a list of group names
+                    group_path_list = group_path.split('/')
+                    self._display.vv("Searching for group path: {}".format(group_path_list))
+                    group = kp.find_groups(path=group_path_list, first=True)
                     if not group:
                         raise AnsibleError(f"Group '{group_path}' not found in the database.")
                     search_params['group'] = group

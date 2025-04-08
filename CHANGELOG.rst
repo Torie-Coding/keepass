@@ -4,6 +4,21 @@ Torie\_Coding.Keepass Release Notes
 
 .. contents:: Topics
 
+v1.3.3
+======
+
+Release Summary
+---------------
+
+| Release Date: 2025-04-08
+| lookup - Bug Fixes
+
+Bugfixes
+--------
+
+- lookup - Fix group search with params.
+- lookup - group_path will process the input as an absolute path and not as a relative path.
+
 v1.3.2
 ======
 

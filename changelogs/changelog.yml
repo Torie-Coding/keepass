@@ -193,3 +193,17 @@ releases:
     fragments:
     - 34-make-it-possible-to-find-a-specific-entry-in-group.yaml
     release_date: '2025-03-05'
+  1.3.3:
+    changes:
+      bugfixes:
+      - lookup - Fix group search with params.
+      - lookup - group_path will process the input as an absolute path and not as
+        a relative path.
+      release_summary: '| Release Date: 2025-04-08
+
+        | lookup - Bug Fixes
+
+        '
+    fragments:
+    - 37-fix-group-search-with-params.yaml
+    release_date: '2025-04-08'

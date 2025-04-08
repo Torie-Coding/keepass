@@ -1,0 +1,7 @@
+bugfixes:
+  - lookup - Fix group search with params.
+  - lookup - group_path will process the input as an absolute path and not as a relative path.
+
+release_summary: |
+  | Release Date: 2025-04-08
+  | lookup - Bug Fixes

@@ -99,13 +99,15 @@ EXAMPLES = """
   debug:
     msg: "{{ lookup('lookup', 'entry', database='/path/to/database.kdbx', database_password='secret', title='My Entry') }}"
 
-- name: Find entries in a specific group 
+- name: Find entries in a specific group
   debug:
     msg: "{{ lookup('lookup', 'entry', database='/path/to/database.kdbx', database_password='secret', group_path='My Group'), recursive=False }}"
 
 - name: Find an entry by title in a specific group
   debug:
-    msg: "{{ lookup('torie_coding.keepass.lookup', 'entry', database='/path/to/database.kdbx', database_password='secret', group_path='My Group', title='My Entry', recursive=False) }}"
+    msg: >-
+      {{ lookup('torie_coding.keepass.lookup', 'entry', database='/path/to/database.kdbx',
+      database_password='secret', group_path='My Group', title='My Entry', recursive=False) }}
 
 - name: Find entries with a specific tag
   debug:

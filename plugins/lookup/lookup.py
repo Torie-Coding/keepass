@@ -212,7 +212,7 @@ class LookupModule(LookupBase):
                     if not group:
                         raise AnsibleError(f"Group '{group_path}' not found in the database.")
                     search_params['group'] = group
-                
+
 
                 if not recursive and group_path in [None, "/"]:
                     # Explicit search in the root group if not recursive

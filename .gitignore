@@ -8,3 +8,8 @@ changelogs/.plugin-cache.yaml
 .vscode/settings.json
 collections
 lint.pylintrc
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/

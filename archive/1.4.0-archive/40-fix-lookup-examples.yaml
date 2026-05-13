@@ -1,0 +1,9 @@
+bugfixes:
+- lookup - Fix 3 of 4 EXAMPLES using short name ``'lookup'`` instead of FQCN ``'torie_coding.keepass.lookup'``.
+- lookup - Fix ``recursive=False`` placed outside Jinja2 ``{{ }}`` block causing a syntax error.
+minor_changes:
+- lookup - Rewrite EXAMPLES block to use ``ansible.builtin.set_fact`` with field-access pattern and ``wantlist=True`` for multi-entry lookups.
+- README.md - Remove duplicate example block in lookup section and align examples with best-practice ``set_fact`` + FQCN module names pattern.
+release_summary: 'Fix and improve lookup plugin EXAMPLES and README.md lookup section.
+  Corrects FQCN usage, fixes a syntax error in examples, removes a duplicate example,
+  and introduces the recommended ``set_fact`` → field-access pattern.'

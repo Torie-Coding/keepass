@@ -95,21 +95,42 @@ options:
 
 
 EXAMPLES = """
-- name: Find an entry by title in KeePass database
-  debug:
-    msg: "{{ lookup('lookup', 'entry', database='/path/to/database.kdbx', database_password='secret', title='My Entry') }}"
+- name: Find an entry by title and store it
+  ansible.builtin.set_fact:
+    kp_entry: "{{ lookup('torie_coding.keepass.lookup', 'entry',
+                  database='/path/to/database.kdbx',
+                  database_password='secret',
+                  title='My Entry') }}"
 
-- name: Find entries in a specific group 
-  debug:
-    msg: "{{ lookup('lookup', 'entry', database='/path/to/database.kdbx', database_password='secret', group_path='My Group'), recursive=False }}"
+- name: Show the retrieved password
+  ansible.builtin.debug:
+    msg: "Password is {{ kp_entry.password }}"
 
-- name: Find an entry by title in a specific group
-  debug:
-    msg: "{{ lookup('torie_coding.keepass.lookup', 'entry', database='/path/to/database.kdbx', database_password='secret', group_path='My Group', title='My Entry', recursive=False) }}"
+- name: Write the password to a file
+  ansible.builtin.copy:
+    content: "{{ kp_entry.password }}"
+    dest: /tmp/my_entry_password.txt
+
+- name: Find all entries in a specific group
+  ansible.builtin.set_fact:
+    kp_entries: "{{ lookup('torie_coding.keepass.lookup', 'entry',
+                    database='/path/to/database.kdbx',
+                    database_password='secret',
+                    group_path='My Group',
+                    recursive=False,
+                    wantlist=True) }}"
+
+- name: Show all group entries
+  ansible.builtin.debug:
+    var: kp_entries
 
 - name: Find entries with a specific tag
-  debug:
-    msg: "{{ lookup('lookup', 'entry', database='/path/to/database.kdbx', database_password='secret', tags=['important']) }}"
+  ansible.builtin.set_fact:
+    kp_entries: "{{ lookup('torie_coding.keepass.lookup', 'entry',
+                    database='/path/to/database.kdbx',
+                    database_password='secret',
+                    tags=['important'],
+                    wantlist=True) }}"
 """
 
 RETURN = """
